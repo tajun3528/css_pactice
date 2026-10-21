@@ -31,8 +31,10 @@ a{
 h2{
     color: #100f0f;
     font-size: 1.5em;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #9d9494;
+    align-items: center;
 }
 
 .image-container {
@@ -47,4 +49,23 @@ h2{
   height: 400px;           
   border: 2px solid #333; 
   border-radius: 5px;     
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;     
+  margin: 20px auto;            
+  background-color: #e9cece;   
+  border-radius: 5px;
+  width: 200px;  
+  justify-content: center;
+}
+
+.button-container button {
+  margin-bottom: 5px; 
+  margin-top: 5px;
+  height: 40px;
+  width: 100px;   
 }
