@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Practice Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#top">CSS Lab</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#grid">Grid</a></li>
+        <li><a href="#forms">Forms</a></li>
+        <li><a href="#ui">UI</a></li>
+        <li><a href="#themes">Themes</a></li>
+        <li><a href="#tasks">Tasks</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>Break this page on purpose.</h1>
+      <p>A practice file for modern HTML and CSS: layers, nesting, container queries, <code>:has()</code>, popovers and scroll-driven animation. Read the comments, then change things.</p>
+      <div class="row">
+        <a class="btn" href="#tasks">See the tasks</a>
+        <button class="btn ghost" popovertarget="tip">What is this?</button>
+      </div>
+      <div id="tip" popover>
+        <h3>No JavaScript here</h3>
+        <p>This popover, the theme picker, the form states and the progress bar are all pure HTML and CSS.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="grid">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Grid and container queries</h2>
+        <p>Resize the window. Cards switch layout based on their own width, not the screen.</p>
+      </div>
+      <div class="cards">
+        <div class="card-box"><article class="card"><div class="icon"></div><h3>Layers</h3><span class="tag">@layer</span><p>Control the cascade without fighting specificity.</p></article></div>
+        <div class="card-box"><article class="card"><div class="icon"></div><h3>Nesting</h3><span class="tag">&amp; selector</span><p>Write child rules inside their parent, natively.</p></article></div>
+        <div class="card-box"><article class="card"><div class="icon"></div><h3>Containers</h3><span class="tag">@container</span><p>Components that adapt to wherever you place them.</p></article></div>
+        <div class="card-box"><article class="card"><div class="icon"></div><h3>Typed props</h3><span class="tag">@property</span><p>Animate values that used to be impossible.</p></article></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="forms">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Forms that react</h2>
+        <p>Type in the fields, then leave them. The parent styles itself using <code>:has()</code> and <code>:user-invalid</code>.</p>
+      </div>
+      <form class="demo" onsubmit="return false">
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" required placeholder="you@example.com">
+          <span class="hint">Must be a valid address.</span>
+        </div>
+        <div class="field">
+          <label for="pw">Password</label>
+          <input id="pw" type="password" required minlength="8" placeholder="8+ characters">
+          <span class="hint">At least 8 characters.</span>
+        </div>
+        <button class="btn" type="submit">Create account</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="ui">
+    <div class="wrap stack">
+      <div class="section-head">
+        <h2>Interface patterns</h2>
+      </div>
+      <div class="glow">
+        <h3>Animated gradient border</h3>
+        <p>Powered by a registered <code>--angle</code> property. Without <code>@property</code> this could not animate.</p>
+      </div>
+
+      <div>
+        <details open>
+          <summary>What is the cascade?</summary>
+          <p>The rules the browser uses to pick a winner when several declarations target the same element: origin, layer, specificity, then source order.</p>
+        </details>
+        <details>
+          <summary>Why use clamp()?</summary>
+          <p>It sets a minimum, a flexible preferred size and a maximum in one value, so type and spacing scale smoothly.</p>
+        </details>
+        <details>
+          <summary>When should I use grid or flexbox?</summary>
+          <p>Use flexbox for one-dimensional rows or columns. Use grid when you need control over rows and columns together.</p>
+        </details>
+      </div>
+
+      <div class="snap" tabindex="0" aria-label="Scroll snap gallery">
+        <div>One</div><div>Two</div><div>Three</div><div>Four</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="themes">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Theme switcher</h2>
+        <p>Radio inputs change custom properties on <code>body</code> through <code>:has()</code>.</p>
+      </div>
+      <fieldset class="themes">
+        <legend class="sr-only">Choose a theme</legend>
+        <label><input type="radio" name="theme" id="t-default" checked>Default</label>
+        <label><input type="radio" name="theme" id="t-sea">Sea</label>
+        <label><input type="radio" name="theme" id="t-sun">Sun</label>
+        <label><input type="radio" name="theme" id="t-night">Night</label>
+      </fieldset>
+    </div>
+  </section>
+
+  <section id="tasks" class="exercises">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Your practice tasks</h2>
+        <p>Search this file for <code>EXERCISE</code> for inline hints. Bigger challenges:</p>
+      </div>
+      <ol>
+        <li>Add a <strong>pricing section</strong> with three plans using grid, where the middle plan is raised and highlighted.</li>
+        <li>Build a <strong>responsive footer</strong> with four link columns that collapse to two, then one, using only <code>repeat(auto-fit, minmax())</code>.</li>
+        <li>Create a <strong>sticky sidebar table of contents</strong> that appears next to the content above 900px.</li>
+        <li>Add a <strong>CSS-only tab component</strong> with radio inputs and <code>:checked ~</code> or <code>:has()</code>.</li>
+        <li>Turn the cards into a <strong>3D flip card</strong> on hover with <code>transform-style: preserve-3d</code> and <code>backface-visibility</code>.</li>
+        <li>Add a <strong>reveal-on-scroll</strong> effect using <code>animation-timeline: view()</code>.</li>
+        <li>Refactor colors using <code>oklch()</code> and generate hover shades with <code>color-mix()</code>.</li>
+        <li>Run Lighthouse and fix every accessibility warning.</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Edit, break, repeat. Browser support: current Chrome, Edge, Safari and Firefox (a few scroll-driven features need a recent Chromium).</div>
+</footer>
+</body>
+</html>

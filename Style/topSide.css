@@ -1,0 +1,210 @@
+/* =========================================================
+   CSS PRACTICE LAB
+   Open this file in your editor + browser. Every section has
+   an "EXERCISE" comment: change it, break it, rebuild it.
+   ========================================================= */
+
+/* 1. CASCADE LAYERS — later layers beat earlier ones, regardless of specificity */
+@layer reset, tokens, base, layout, components, themes, utilities;
+
+/* 2. @property — typed custom properties (lets gradients animate) */
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  img, svg { display: block; max-width: 100%; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+}
+
+@layer tokens {
+  :root {
+    --ink: #14213d;
+    --paper: #eef1f6;
+    --surface: #ffffff;
+    --line: #d3dbeb;
+    --accent: #3a5bff;
+    --signal: #ffb400;
+    --ok: #12a06b;
+    --bad: #d6314b;
+
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "IBM Plex Sans", system-ui, sans-serif;
+
+    /* fluid type scale: min, preferred, max */
+    --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --step-2: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+    --step-5: clamp(2.75rem, 1.5rem + 6vw, 6rem);
+
+    --radius: 14px;
+    --space: clamp(1rem, 0.5rem + 2vw, 2rem);
+    color-scheme: light dark;
+  }
+  /* EXERCISE: add a --shadow token and use it on .card */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) { --ink: #e8edfb; --paper: #0d1426; --surface: #161f38; --line: #2a3658; }
+  }
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--paper);
+    /* theme picker below uses :has() on body */
+  }
+  h1, h2, h3 { font-family: var(--font-display); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
+  p { text-wrap: pretty; max-width: 62ch; }
+  a { color: var(--accent); text-underline-offset: 0.2em; }
+  :focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }
+  code { font-family: ui-monospace, monospace; font-size: .9em; background: var(--line); padding: .1em .35em; border-radius: 5px; }
+}
+
+/* 3. SCROLL-DRIVEN ANIMATION — progress bar with no JavaScript */
+.progress {
+  position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 50;
+  background: var(--accent); transform-origin: left; scale: 0 1;
+  animation: grow linear both; animation-timeline: scroll(root);
+}
+@keyframes grow { to { scale: 1 1; } }
+
+@layer layout {
+  .wrap { width: min(100% - 2*var(--space), 70rem); margin-inline: auto; }
+  section { padding-block: clamp(3rem, 8vw, 6rem); }
+  .section-head { margin-bottom: 2rem; display: grid; gap: .5rem; }
+  .section-head h2 { font-size: var(--step-2); }
+
+  /* sticky header with blur */
+  .site-head {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--paper) 80%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-head .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: .75rem; gap: 1rem; }
+  .brand { font-family: var(--font-display); font-weight: 800; text-decoration: none; color: inherit; }
+  nav ul { display: flex; gap: 1.25rem; list-style: none; padding: 0; flex-wrap: wrap; }
+  nav a { color: inherit; text-decoration: none; padding-block: .25rem; background: linear-gradient(var(--accent) 0 0) 0 100% / 0 2px no-repeat; transition: background-size .25s; }
+  nav a:hover { background-size: 100% 2px; }
+  /* EXERCISE: highlight the nav link of the section currently in view (hint: scroll-target-group or IntersectionObserver) */
+}
+
+/* ---------- HERO ---------- */
+.hero { padding-block: clamp(4rem, 12vw, 9rem) clamp(3rem, 6vw, 5rem); }
+.hero h1 {
+  font-size: var(--step-5); font-weight: 800; max-width: 14ch;
+  /* variable font axes */
+  font-variation-settings: "opsz" 96;
+}
+.hero p { margin-top: 1.5rem; font-size: calc(var(--step-0) * 1.15); }
+.hero .row { display: flex; gap: .75rem; margin-top: 2rem; flex-wrap: wrap; }
+
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .75em 1.25em; border-radius: 999px; border: 2px solid var(--ink);
+    background: var(--ink); color: var(--paper); font-weight: 500; cursor: pointer; text-decoration: none;
+    transition: translate .15s, box-shadow .15s;
+    &:hover { translate: 0 -2px; box-shadow: 0 6px 0 var(--signal); }  /* native CSS nesting */
+    &:active { translate: 0 1px; box-shadow: none; }
+    &.ghost { background: transparent; color: var(--ink); }
+  }
+
+  /* 4. GRID — auto-fit with minmax, no media queries */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1.25rem; }
+
+  /* 5. CONTAINER QUERIES — the card responds to ITS width, not the viewport */
+  .card-box { container: card / inline-size; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 1.25rem; display: grid; gap: .75rem; height: 100%;
+    & h3 { font-size: 1.35rem; }
+    & .tag { justify-self: start; font-size: .8rem; padding: .15em .7em; border-radius: 999px; background: var(--line); }
+  }
+  @container card (min-width: 22rem) {
+    .card { grid-template-columns: 6rem 1fr; align-items: start; }
+    .card .tag { grid-column: 2; }
+  }
+  .card .icon { aspect-ratio: 1; border-radius: 12px; background: conic-gradient(from 200deg, var(--accent), var(--signal), var(--ok), var(--accent)); }
+  /* EXERCISE: make the first card span 2 columns on wide screens using :first-child + grid-column */
+
+  /* 6. ANIMATED GRADIENT BORDER using @property */
+  .glow {
+    position: relative; padding: 2rem; border-radius: var(--radius); background: var(--surface);
+    border: 3px solid transparent;
+    background:
+      linear-gradient(var(--surface), var(--surface)) padding-box,
+      conic-gradient(from var(--angle), var(--accent), var(--signal), var(--ok), var(--accent)) border-box;
+    animation: spin 6s linear infinite;
+  }
+  @keyframes spin { to { --angle: 360deg; } }
+
+  /* 7. :has() — style a parent based on its children */
+  .field { display: grid; gap: .35rem; }
+  .field input {
+    padding: .7em .9em; border-radius: 10px; border: 2px solid var(--line); background: var(--surface);
+  }
+  .field:has(input:user-invalid) { color: var(--bad); }
+  .field:has(input:user-invalid) input { border-color: var(--bad); }
+  .field:has(input:user-valid) input { border-color: var(--ok); }
+  .field .hint { font-size: .85rem; opacity: .75; }
+  form.demo { display: grid; gap: 1rem; max-width: 26rem; }
+  /* EXERCISE: show a green check after valid inputs using ::after on .field */
+
+  /* 8. Native <details> accordion with animated icon */
+  details { border-bottom: 1px solid var(--line); padding-block: 1rem; }
+  summary { cursor: pointer; font-family: var(--font-display); font-size: 1.2rem; list-style: none; display: flex; justify-content: space-between; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; transition: rotate .25s; }
+  details[open] summary::after { rotate: 45deg; }
+  details p { margin-top: .75rem; }
+  /* EXERCISE: animate the open/close height (look up ::details-content and interpolate-size) */
+
+  /* 9. POPOVER API — a tooltip/menu with zero JS */
+  [popover] {
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem; background: var(--surface); color: var(--ink);
+    max-width: 22rem; box-shadow: 0 20px 50px rgb(0 0 0 / .25);
+    opacity: 0; translate: 0 10px; transition: opacity .2s, translate .2s, overlay .2s allow-discrete, display .2s allow-discrete;
+  }
+  [popover]:popover-open { opacity: 1; translate: 0 0; }
+  @starting-style { [popover]:popover-open { opacity: 0; translate: 0 10px; } }
+  [popover]::backdrop { background: rgb(10 15 35 / .45); }
+
+  /* 10. Scroll snap gallery */
+  .snap { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; }
+  .snap > * { flex: 0 0 min(80%, 18rem); scroll-snap-align: start; aspect-ratio: 4/3; border-radius: var(--radius); display: grid; place-items: center; font-family: var(--font-display); font-size: 2rem; color: #fff; }
+  .snap > :nth-child(1) { background: linear-gradient(135deg, #3a5bff, #7a3aff); }
+  .snap > :nth-child(2) { background: linear-gradient(135deg, #12a06b, #0b6e8c); }
+  .snap > :nth-child(3) { background: linear-gradient(135deg, #d6314b, #ff8a3a); }
+  .snap > :nth-child(4) { background: linear-gradient(135deg, #14213d, #3a5bff); }
+  /* EXERCISE: add scroll-driven scale so the centered item grows (animation-timeline: view(inline)) */
+}
+
+/* 11. THEME SWITCHER — radio buttons + :has(), no JS */
+@layer themes {
+  .themes { display: flex; gap: .5rem; flex-wrap: wrap; border: 0; padding: 0; }
+  .themes label { cursor: pointer; padding: .4em 1em; border: 2px solid var(--line); border-radius: 999px; background: var(--surface); }
+  .themes input { position: absolute; opacity: 0; }
+  .themes label:has(input:checked) { border-color: var(--accent); background: var(--accent); color: #fff; }
+  .themes label:has(input:focus-visible) { outline: 3px solid var(--signal); outline-offset: 3px; }
+
+  body:has(#t-sea:checked)  { --paper: #e3f4f1; --accent: #0b7a75; --ink: #08302e; --line: #bfe1dc; }
+  body:has(#t-sun:checked)  { --paper: #fff4dc; --accent: #c2410c; --ink: #3b1d08; --line: #f0d9a8; }
+  body:has(#t-night:checked){ --paper: #0b1020; --surface: #151c34; --accent: #7c9bff; --ink: #e8edfb; --line: #29335a; }
+  /* EXERCISE: add a fourth theme, then persist the choice with localStorage + a small script */
+}
+
+@layer utilities {
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .stack > * + * { margin-top: 1rem; }
+}
+
+.exercises ol { padding-left: 1.25rem; display: grid; gap: .6rem; }
+footer { padding-block: 3rem; border-top: 1px solid var(--line); font-size: .9rem; }
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
