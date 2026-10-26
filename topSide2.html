@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spoke &amp; Co. | Bikes, repairs, good rides</title>
+<meta name="description" content="Spoke & Co. is a small bike shop for custom builds, fast repairs and weekend group rides.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="#top">Spoke<span>&amp;</span>Co.</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#bikes">Bikes</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#rides">Rides</a></li>
+        <li><a href="#contact" class="pill">Book a fix</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero wrap">
+    <p class="eyebrow">Independent bike shop</p>
+    <h1>Ride more.<br><em>Wait less.</em></h1>
+    <p class="lead">Custom builds, same-day repairs and Saturday group rides. No jargon, no upselling, just bikes that work.</p>
+    <div class="actions">
+      <a class="btn" href="#bikes">Browse bikes</a>
+      <a class="btn outline" href="#contact">Book a repair</a>
+    </div>
+    <dl class="stats">
+      <div><dt>Same-day</dt><dd>repairs on most jobs</dd></div>
+      <div><dt>12 yrs</dt><dd>building custom bikes</dd></div>
+      <div><dt>40+</dt><dd>riders every Saturday</dd></div>
+    </dl>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Road</span><span>Gravel</span><span>Commuter</span><span>Mountain</span><span>Cargo</span><span>Kids</span>
+      <span>Road</span><span>Gravel</span><span>Commuter</span><span>Mountain</span><span>Cargo</span><span>Kids</span>
+    </div>
+  </div>
+
+  <section id="bikes" class="wrap section">
+    <header class="section-head">
+      <p class="eyebrow">01 / Bikes</p>
+      <h2>Built to your measure</h2>
+    </header>
+    <div class="bikes">
+      <article class="bike b1">
+        <div class="art"></div>
+        <h3>Tempo Road</h3>
+        <p>Light aluminium frame, 2x11 drivetrain, built for fast weekday miles.</p>
+        <p class="price">$1,290</p>
+      </article>
+      <article class="bike b2">
+        <div class="art"></div>
+        <h3>Gritty Gravel</h3>
+        <p>Wide tyres, disc brakes and mounts for every bag you own.</p>
+        <p class="price">$1,590</p>
+      </article>
+      <article class="bike b3">
+        <div class="art"></div>
+        <h3>City Loop</h3>
+        <p>Mudguards, lights and a rack fitted. Sit up, ride in your work clothes.</p>
+        <p class="price">$890</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="services" class="section alt">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">02 / Services</p>
+        <h2>Fixed fast, priced fairly</h2>
+      </header>
+      <div class="services">
+        <article><span class="num">A</span><h3>Quick tune</h3><p>Brakes, gears and a safety check while you wait.</p><p class="price">$45</p></article>
+        <article><span class="num">B</span><h3>Full service</h3><p>Strip, clean, regrease and rebuild. Ready in two days.</p><p class="price">$140</p></article>
+        <article><span class="num">C</span><h3>Wheel truing</h3><p>Wobbles gone, spokes tensioned, no more rubbing.</p><p class="price">$30</p></article>
+        <article><span class="num">D</span><h3>Custom build</h3><p>Pick frame and parts, we assemble and fit you to it.</p><p class="price">From $600</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="rides" class="wrap section">
+    <header class="section-head">
+      <p class="eyebrow">03 / Rides</p>
+      <h2>Saturday group rides</h2>
+    </header>
+    <ol class="steps">
+      <li><h3>Meet at the shop</h3><p>7:00 AM, free coffee, bring a bottle and a spare tube.</p></li>
+      <li><h3>Pick your pace</h3><p>Three groups: relaxed, steady and fast. Nobody gets dropped.</p></li>
+      <li><h3>Finish together</h3><p>Back by 10:00 for breakfast and bike talk.</p></li>
+    </ol>
+  </section>
+
+  <section id="contact" class="section alt">
+    <div class="wrap contact">
+      <div>
+        <p class="eyebrow">04 / Contact</p>
+        <h2>Book a repair</h2>
+        <p>Tell us what is wrong and we will reply within a few hours.</p>
+        <address>
+          <p><strong>Hours</strong><br>Mon to Fri 9:00 to 18:00<br>Sat 7:00 to 16:00</p>
+        </address>
+      </div>
+      <form action="#" onsubmit="return false">
+        <label>Name<input type="text" placeholder="Your name" required></label>
+        <label>Email<input type="email" placeholder="you@example.com" required></label>
+        <label>Service
+          <select>
+            <option>Quick tune</option>
+            <option>Full service</option>
+            <option>Wheel truing</option>
+            <option>Custom build</option>
+          </select>
+        </label>
+        <label>What is wrong?<textarea rows="4" placeholder="Describe the problem"></textarea></label>
+        <button class="btn" type="submit">Send request</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="logo">Spoke<span>&amp;</span>Co.</p>
+    <p>&copy; 2026 Spoke &amp; Co. A practice website.</p>
+  </div>
+</footer>
+
+</body>
+</html>
