@@ -1,0 +1,92 @@
+/* ===== Nila Rahman Portfolio ===== */
+:root {
+  --bg: #f7f7f4;
+  --ink: #111111;
+  --blue: #2438ff;
+  --pink: #ff7ac6;
+  --yellow: #ffd23f;
+  --mint: #7be0b5;
+  --line: 2px solid var(--ink);
+  --sans: "Space Grotesk", system-ui, sans-serif;
+  --serif: "DM Serif Display", Georgia, serif;
+  --pad: clamp(1.25rem, 5vw, 4rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+section { padding: clamp(3.5rem, 9vw, 7rem) var(--pad); border-bottom: var(--line); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1; text-wrap: balance; }
+h2 { font-size: clamp(2.25rem, 1rem + 5vw, 4.5rem); }
+i { color: var(--blue); }
+
+/* Top bar */
+.top { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: .9rem var(--pad); background: var(--bg); border-bottom: var(--line); }
+.mark { font-family: var(--serif); font-size: 1.6rem; text-decoration: none; }
+.top nav { display: flex; align-items: center; gap: 1.5rem; }
+.top nav a { text-decoration: none; font-weight: 500; }
+.top nav a:not(.cta):hover { text-decoration: underline; text-underline-offset: .3em; }
+.cta { background: var(--ink); color: var(--bg); padding: .45em 1em; border-radius: 999px; transition: background .2s; }
+.cta:hover { background: var(--blue); }
+@media (max-width: 600px) { .top nav a:not(.cta) { display: none; } }
+
+/* Intro */
+.intro { padding-block: clamp(4rem, 12vw, 9rem); }
+.tag { display: inline-block; font-size: .85rem; font-weight: 500; padding: .35em .9em; border: var(--line); border-radius: 999px; background: var(--yellow); }
+.intro h1 { font-size: clamp(3rem, 1rem + 9vw, 8.5rem); max-width: 14ch; margin: 1.5rem 0; letter-spacing: -0.02em; }
+.sub { max-width: 40ch; font-size: 1.2rem; }
+.arrow { display: inline-flex; gap: .6rem; margin-top: 2rem; font-weight: 700; text-decoration: none; border-bottom: var(--line); padding-bottom: .2rem; }
+.arrow span { transition: translate .25s; }
+.arrow:hover span { translate: 0 5px; }
+
+/* Work */
+.head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 2.5rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1.5rem; }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } .wide { grid-column: span 2; } }
+.project { text-decoration: none; display: grid; gap: .75rem; }
+.thumb { aspect-ratio: 4 / 3; border: var(--line); border-radius: 18px; display: grid; place-items: center; overflow: hidden; box-shadow: 6px 6px 0 var(--ink); transition: transform .2s, box-shadow .2s; }
+.wide .thumb { aspect-ratio: 16 / 9; }
+.thumb b { font-family: var(--serif); font-weight: 400; font-size: clamp(2.5rem, 6vw, 5rem); transition: scale .35s; }
+.project:hover .thumb { transform: translate(-3px, -3px); box-shadow: 10px 10px 0 var(--ink); }
+.project:hover .thumb b { scale: 1.12; }
+.p1 .thumb { background: var(--yellow); }
+.p2 .thumb { background: var(--pink); }
+.p3 .thumb { background: var(--mint); }
+.p4 .thumb { background: var(--blue); color: #fff; }
+.p5 .thumb { background: var(--ink); color: var(--bg); }
+.meta { display: flex; justify-content: space-between; align-items: baseline; margin-top: .5rem; }
+.meta h3 { font-size: 1.5rem; }
+.meta p { font-size: .9rem; opacity: .7; }
+
+/* About */
+.about { background: var(--pink); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 2.5rem; margin-top: 2.5rem; }
+.big { font-family: var(--serif); font-size: clamp(1.5rem, 1rem + 2vw, 2.4rem); line-height: 1.15; }
+.text { display: grid; gap: 1rem; align-content: start; max-width: 40ch; }
+
+/* Skills */
+.skills ul { list-style: none; padding: 0; margin-top: 2rem; }
+.skills li { display: flex; align-items: baseline; gap: 1.5rem; padding: 1rem 0; border-top: var(--line); font-family: var(--serif); font-size: clamp(1.75rem, 1rem + 3vw, 3.25rem); transition: padding-left .25s, color .25s; }
+.skills li:last-child { border-bottom: var(--line); }
+.skills li span { font-family: var(--sans); font-size: .9rem; }
+.skills li:hover { padding-left: 1.5rem; color: var(--blue); }
+
+/* Contact */
+.contact { background: var(--blue); color: #fff; }
+.contact i { color: var(--yellow); }
+.contact h2 { max-width: 14ch; }
+.email { display: inline-block; margin-block: 1.5rem 2.5rem; font-size: clamp(1.25rem, 1rem + 2vw, 2rem); font-weight: 500; text-underline-offset: .25em; }
+.contact form { display: grid; gap: 1rem; max-width: 34rem; }
+.contact input, .contact textarea { font: inherit; padding: .9em 1em; background: transparent; color: #fff; border: 2px solid #fff; border-radius: 12px; }
+.contact input::placeholder, .contact textarea::placeholder { color: rgb(255 255 255 / .7); }
+.contact input:focus, .contact textarea:focus { outline: none; background: rgb(255 255 255 / .12); }
+.contact button { justify-self: start; font: inherit; font-weight: 700; padding: .9em 1.8em; background: var(--yellow); color: var(--ink); border: var(--line); border-radius: 999px; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.contact button:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
+
+/* Footer */
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 1.5rem var(--pad); font-size: .9rem; }
+footer a { text-underline-offset: .25em; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
