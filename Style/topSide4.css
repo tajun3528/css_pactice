@@ -14,7 +14,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; overflow-x: clip; -webkit-text-size-adjust: 100%; }
 body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 400; line-height: 1.7; letter-spacing: .01em; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
@@ -40,7 +40,6 @@ p { text-wrap: pretty; }
 .site-header nav { display: flex; align-items: center; gap: 2rem; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; }
 .site-header nav a:not(.btn) { text-decoration: none; color: var(--muted); transition: color .2s; }
 .site-header nav a:not(.btn):hover { color: var(--gold); }
-@media (max-width: 640px) { .site-header nav a:not(.btn) { display: none; } }
 
 /* Hero */
 .hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 3rem; align-items: center; max-width: 80rem; margin-inline: auto; padding: clamp(3.5rem, 8vw, 7rem) var(--pad); }
@@ -109,5 +108,78 @@ details p { margin-top: 1rem; color: var(--muted); max-width: 52ch; }
 
 /* Footer */
 footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-top: clamp(3rem, 6vw, 5rem); padding: 2rem var(--pad); border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; letter-spacing: .06em; }
+
+/* =========================================================
+   RESPONSIVE
+   Desktop: default styles above
+   Tablet:  max-width 900px
+   Phone:   max-width 640px
+   Small:   max-width 380px
+   ========================================================= */
+
+/* Hamburger (hidden on desktop) */
+.menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+.burger { display: none; width: 2.75rem; height: 2.75rem; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; border: 1px solid var(--line); }
+.burger span { width: 1.2rem; height: 1px; background: var(--gold); transition: transform .3s, opacity .3s; }
+.menu-toggle:focus-visible + .burger { outline: 2px solid var(--gold); outline-offset: 3px; }
+.menu-toggle:checked + .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle:checked + .burger span:nth-child(2) { opacity: 0; }
+.menu-toggle:checked + .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Tablet */
+@media (max-width: 900px) {
+  .site-header nav { gap: 1.25rem; }
+  .hero { text-align: center; }
+  .lead { margin-inline: auto; }
+  .row { justify-content: center; }
+  .hero-art { order: -1; width: min(100%, 20rem); }
+  .head { flex-direction: column; align-items: flex-start; }
+}
+
+/* Phone */
+@media (max-width: 640px) {
+  .burger { display: flex; }
+  .site-header { flex-wrap: wrap; }
+  .site-header nav {
+    display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 0;
+    margin-top: 1rem; border-top: 1px solid var(--line);
+  }
+  .menu-toggle:checked ~ nav { display: flex; }
+  .site-header nav a:not(.btn) { padding: 1rem 0; border-bottom: 1px solid var(--line); font-size: .85rem; }
+  .site-header nav .btn { margin-top: 1rem; text-align: center; padding-block: 1em; }
+
+  .section { padding-block: 3.5rem; }
+  .hero { gap: 2rem; padding-block: 2.5rem 3.5rem; }
+  .hero-art { width: min(100%, 16rem); outline-offset: 10px; }
+  .row .btn { flex: 1 1 100%; text-align: center; padding-block: 1em; }
+
+  .products { grid-template-columns: repeat(2, 1fr); gap: 1.25rem .9rem; }
+  .product h3 { font-size: 1.25rem; }
+  .product p { font-size: .85rem; }
+  .buy { flex-direction: column; gap: .6rem; }
+  .buy .btn { width: 100%; text-align: center; }
+  .badge { font-size: .55rem; top: 1rem; padding: .3em .7em; }
+
+  .features { gap: 2.25rem; margin-top: 3rem; }
+  summary { font-size: 1.25rem; min-height: 2.75rem; }
+  .join { margin-inline: 1rem; outline-offset: 6px; }
+  .join form { flex-direction: column; }
+  .join input { max-width: none; }
+  .join .btn { width: 100%; padding-block: 1em; }
+  footer { flex-direction: column; text-align: center; }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .products { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.75rem; }
+  h2 { font-size: 2.1rem; }
+}
+
+/* Touch devices: no hover-only lift effects stuck on tap */
+@media (hover: none) {
+  .product:hover .pic, .btn:hover { transform: none; }
+  .btn:hover { letter-spacing: .18em; }
+}
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
