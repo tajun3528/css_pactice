@@ -13,3 +13,16 @@
   --r: 28px;
   --pad: clamp(1.25rem, 5vw, 4rem);
 }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; overflow-x: clip; -webkit-text-size-adjust: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.65; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; text-wrap: balance; }
+h2 { font-size: clamp(2rem, 1rem + 3.8vw, 3.5rem); }
+h3 { font-size: 1.35rem; font-weight: 600; }
+p { text-wrap: pretty; }
+.section { padding: clamp(3.5rem, 8vw, 6rem) var(--pad); max-width: 78rem; margin-inline: auto; }
+.head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.head p { color: var(--muted); }
