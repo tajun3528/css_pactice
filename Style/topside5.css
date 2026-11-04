@@ -1,0 +1,15 @@
+:root {
+  --bg: #fbfaff;
+  --ink: #14123a;
+  --muted: #5f5d82;
+  --indigo: #4f46e5;
+  --violet: #8b5cf6;
+  --coral: #ff6b4a;
+  --mint: #2dd4a7;
+  --soft: #eeecff;
+  --line: #e3e0f7;
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  --sans: "DM Sans", system-ui, sans-serif;
+  --r: 28px;
+  --pad: clamp(1.25rem, 5vw, 4rem);
+}
